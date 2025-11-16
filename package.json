@@ -1,5 +1,5 @@
 {
-  "name": "proyectoexpress",
+  "name": "backtiendamates",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
-  "keywords": ["tp"],
+  "keywords": [
+    "tp"
+  ],
   "author": "Emiliano García, Gricel Diaz Zabala",
   "license": "ISC",
   "dependencies": {
@@ -16,5 +18,13 @@
     "express": "^5.1.0",
     "mysql2": "^3.15.3",
     "nodemon": "^3.1.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GricelDiazZabala/grupo1Integrador25C2Div132_back.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GricelDiazZabala/grupo1Integrador25C2Div132_back/issues"
+  },
+  "homepage": "https://github.com/GricelDiazZabala/grupo1Integrador25C2Div132_back#readme"
 }
