@@ -26,7 +26,6 @@ getProducts_form.addEventListener("submit", async (event) => {
         let datos = await response.json();
         console.log(datos);
 
-    
         let producto = datos.payload[0];
 
         
@@ -42,8 +41,8 @@ function mostrarProducto(producto) {
 
     let htmlProducto = `
         <li class="li-listados">
-            <img src="${producto.image}" alt="${producto.name}" class="img-listados">
-            <p>Id: ${producto.id}/ Nombre: ${producto.name}/ <strong>Precio: $${producto.price}</strong></p>
+            <img src="${producto.img_producto}" alt="${producto.nombre_producto}" class="img-listados">
+            <p>Id: ${producto.id}/ Nombre: ${producto.nombre_producto}/ <strong>Precio: $${producto.precio_producto}</strong></p>
         </li>
         <li class="li-botonera">
             <input type="button" id="updateProduct_button" value="Actualizar producto">
@@ -80,7 +79,7 @@ function crearFormularioPut(event, producto) {
             <br>
 
             <label for="categoryProd">Categoria</label>
-            <select name="category" id="categoryProd" required>
+            <select name="tipo_producto" id="categoryProd" required>
                 <option value="mate">mate</option>
                 <option value="termo">termo</option>
             </select>
@@ -112,13 +111,12 @@ async function actualizarProducto(event) {
 
     
     let formData = new FormData(event.target); 
-    console.log(formData);
 
     let data = Object.fromEntries(formData.entries()); 
-    console.log(data);
+    console.log("los datos del formulario de update", data);
 
     try {
-        let response = await fetch(url, {
+        let response = await fetch(API_BASE_URL, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -140,8 +138,8 @@ async function actualizarProducto(event) {
             contenedor_formulario.innerHTML = "";
 
         } else {
-            console.error("Error: ", error.message);
-            alert(error.message);
+            console.error("Error: ", result.message);
+            alert(result.message);
         }
 
     } catch (error) {

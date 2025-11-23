@@ -90,17 +90,17 @@ export const createProduct = async (req, res) => {
 export const modifyProduct = async (req, res) => {
     try {
         
-        let { id, name, image, category, price, active } = req.body;
+        let { id, nombre_producto, precio_producto, tipo_producto, img_producto, activo } = req.body;
 
 
         
-        if(!id || !name || !image || !category || !price || !active) {
+        if(!id || !nombre_producto || !precio_producto || !tipo_producto || !img_producto || !activo) {
             return res.status(400).json({
                 message: "Faltan campos requeridos"
             });
         }
 
-        let [result] = await ProductModel.updateProduct(name, image, category, price, active, id);
+        let [result] = await ProductModel.updateProduct(nombre_producto, precio_producto, tipo_producto, img_producto, activo, id);
 
         console.log(result);
 

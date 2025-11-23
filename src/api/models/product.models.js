@@ -20,14 +20,14 @@ const insertProduct = (nombre_producto, precio_producto, tipo_producto, img_prod
 }
 
 
-const updateProduct = (name, image, category, price, active, id) => {
+const updateProduct = (nombre_producto, precio_producto, tipo_producto, img_producto, activo, id) => {
     let sql = `
         UPDATE productos
-        SET nombre = ?, img_url = ?, category = ?, price = ?, active = ?
+        SET nombre_producto = ?, precio_producto = ?, tipo_producto = ?, img_producto = ?, activo = ?
         WHERE id = ?
     `;
 
-    return connection.query(sql, [name, image, category, price, active, id]); 
+    return connection.query(sql, [nombre_producto, precio_producto, tipo_producto, img_producto, activo, id]); 
 }
 
 
