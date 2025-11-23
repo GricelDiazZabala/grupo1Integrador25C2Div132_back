@@ -9,7 +9,7 @@
         <!-- Vamos a iterar el array de productos que le pasamos desde el endpoint -->
         <% productos.forEach(producto => { %>
             <div class="card-producto">
-                <img src="<%= producto.img_producto %>" alt="<%= producto.nombre_producto %>">
+                <img src="<%= producto.img_producto %>" alt="<%= producto.nombre_producto %>" class="img-producto">
                 <h5><%= producto.nombre_producto %></h5>
                 <p>Id: <%= producto.id %></p>
                 <p>$<%= producto.precio_producto %></p>

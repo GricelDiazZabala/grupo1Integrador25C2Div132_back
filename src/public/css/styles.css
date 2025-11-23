@@ -49,8 +49,12 @@ nav ul {
     margin: 0;
 }
 
-.card-producto img {
-    width: 65px;
+.img-producto {
+    width: 100px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 6px;
+    background-color: white; 
 }
 
 
