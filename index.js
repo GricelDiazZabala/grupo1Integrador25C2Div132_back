@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.static(join(__dirname, "src", "public")));
 
 // -------------------- MOTOR DE VISTAS --------------------
+// Configuramos EJS como motor de vistas
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "src", "views"));
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
     res.send("TP Integrador Div 132");
 });
 
+// Ruta que consulta productos y renderiza vista index.ejs
 app.get("/index", async (req, res) => {
     try {
         const [rows] = await connection.query("SELECT * FROM productos");
@@ -39,6 +41,7 @@ app.get("/index", async (req, res) => {
     }
 });
 
+// Vistas para consultar productos por id
 app.get("/consultar", (req, res) => {
     res.render("consultar", {
         title: "Consultar",
@@ -46,6 +49,8 @@ app.get("/consultar", (req, res) => {
     });
 });
 
+
+// Vista para crear productos
 app.get("/crear", (req, res) => {
     res.render("crear", {
         title: "Crear",
@@ -53,6 +58,7 @@ app.get("/crear", (req, res) => {
     });
 });
 
+// Vista para modificar productos
 app.get("/modificar", (req, res) => {
     res.render("modificar", {
         title: "Modificar",
@@ -60,6 +66,8 @@ app.get("/modificar", (req, res) => {
     });
 });
 
+
+// Vista para borrar productos
 app.get("/eliminar", (req, res) => {
     res.render("eliminar", {
         title: "Eliminar",

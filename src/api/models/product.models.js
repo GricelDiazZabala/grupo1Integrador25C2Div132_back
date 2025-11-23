@@ -33,11 +33,11 @@ const updateProduct = (name, image, category, price, active, id) => {
 
 const deleteProduct = (id) => {
 
-     let sql = `DELETE FROM products WHERE id = ?`;
+    let sql = `DELETE FROM products WHERE id = ?`;
 
-     let sql2 = `UPDATE products set active = 0 WHERE id = ?`;
+    let sql2 = `UPDATE products set active = 0 WHERE id = ?`;
 
-     return connection.query(sql, [id]);
+    return connection.query(sql, [id]);
 }
 
 
