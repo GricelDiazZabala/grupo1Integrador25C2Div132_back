@@ -5,17 +5,14 @@ import { API_BASE_URL } from "./config.js";
 
 getProducts_form.addEventListener("submit", async (event) => {
     
-    event.preventDefault(); //
+    event.preventDefault(); 
 
     let formData = new FormData(event.target); 
-    console.log(formData);
-
     
     let data = Object.fromEntries(formData.entries()); // Object { id: "2" }
     console.log(data);
 
     let idProducto = data.id;
-    console.log(idProducto);
 
     try {
 
@@ -44,8 +41,8 @@ function mostrarProducto(producto) {
 
     let htmlProducto = `
         <li class="li-listados">
-            <img src="${producto.image}" alt="${producto.name}" class="img-listados">
-            <p>Id: ${producto.id}/ Nombre: ${producto.name}/ <strong>Precio: $${producto.price}</strong></p>
+            <img src="${producto.img_producto}" alt="${producto.nombre_producto}" class="img-listados">
+            <p>Id: ${producto.id}/ Nombre: ${producto.nombre_producto}/ <strong>Precio: $${producto.precio_producto}</strong></p>
         </li>
         <li class="li-botonera">
             <input type="button" id="deleteProduct_button" value="Eliminar producto">
@@ -58,7 +55,7 @@ function mostrarProducto(producto) {
 
     deleteProduct_button.addEventListener("click", event => {
 
-        event.stopPropagation(); // Evitar la propagacion de eventos
+        event.stopPropagation(); 
 
         let confirmacion = confirm("Querés eliminar este producto?");
 
@@ -76,14 +73,13 @@ async function eliminarProducto(id) {
     
     try {
 
-        console.log(`Haciendo peticion DELETE a ${url}/${id}`);
-        let response = await fetch(`${url}/${id}`, {
+        let response = await fetch(`${API_BASE_URL}/${id}`, {
             method: "DELETE"
         });
 
         console.log(response);
 
-        let result = await response.json(); // Procesamos la respuesta json que devolvemos del servidor
+        let result = await response.json();
 
         if(response.ok) {
             alert(result.message);
