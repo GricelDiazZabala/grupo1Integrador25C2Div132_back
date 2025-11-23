@@ -3,7 +3,7 @@ import connection from "../database/db.js";
 
 const selectAllProducts = () => {
 
-    const sql = "SELECT * FROM productos";
+    const sql = "SELECT * FROM productos WHERE activo = 1";
     return connection.query(sql);
 }
 

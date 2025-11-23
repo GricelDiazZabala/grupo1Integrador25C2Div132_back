@@ -6,11 +6,9 @@ import { API_BASE_URL } from "./config.js";
 getProducts_form.addEventListener("submit", async (event) => {
     
     event.preventDefault(); 
-
     
     let formData = new FormData(event.target); 
     console.log(formData);
-
     
     let data = Object.fromEntries(formData.entries());
     console.log(data);
@@ -22,7 +20,6 @@ getProducts_form.addEventListener("submit", async (event) => {
         
         let response = await fetch(`${API_BASE_URL}/${idProducto}`);
         console.log(response);
-
         
         let result = await response.json();
         console.log(result);
@@ -30,18 +27,15 @@ getProducts_form.addEventListener("submit", async (event) => {
         if(response.ok) {
             
             let producto = result.payload[0]; 
-
         
             mostrarProducto(producto); 
 
         } else {
             
             console.error(result.message)
-
         
             mostrarError(result.message);
         }
-
 
     } catch (error) {
         console.error("Error: ", error);

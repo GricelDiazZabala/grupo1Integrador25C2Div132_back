@@ -9,30 +9,35 @@ getProducts_form.addEventListener("submit", async (event) => {
 
     let formData = new FormData(event.target); 
     
-    let data = Object.fromEntries(formData.entries()); // Object { id: "2" }
-    console.log(data);
+    let data = Object.fromEntries(formData.entries()); 
 
     let idProducto = data.id;
 
     try {
 
         let response = await fetch(`${API_BASE_URL}/${idProducto}`);
-        console.log(response);
-
         
-        let datos = await response.json();
-        console.log(datos);
-
+        let result = await response.json();
         
-        let producto = datos.payload[0];
+        console.log(result);
 
-    
-        mostrarProducto(producto); 
+        if(response.ok) {
+            
+            let producto = result.payload[0]; 
+        
+            mostrarProducto(producto); 
+
+        } else {
+            
+            console.error(result.message)
+        
+            mostrarError(result.message);
+        } 
 
     } catch (error) {
         console.error("Error: ", error);
-    }
 
+    }
 
 });
 
@@ -77,13 +82,10 @@ async function eliminarProducto(id) {
             method: "DELETE"
         });
 
-        console.log(response);
-
         let result = await response.json();
 
         if(response.ok) {
             alert(result.message);
-            console.log(result.message);
 
             listado_productos.innerHTML = "";
 
@@ -96,4 +98,16 @@ async function eliminarProducto(id) {
         console.error("Error en la solicitud DELETE: ", error);
         alert("Ocurrio un error al eliminar un producto");
     }
+}
+
+
+function mostrarError(message) {
+    listado_productos.innerHTML = `
+        <li class="mensaje-error">
+            <p>
+                <strong>Error:</strong>
+                <span>${message}</span>
+            </p>
+        </li>
+    `;
 }

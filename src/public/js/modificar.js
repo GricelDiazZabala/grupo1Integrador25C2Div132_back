@@ -22,17 +22,24 @@ getProducts_form.addEventListener("submit", async (event) => {
         let response = await fetch(`${API_BASE_URL}/${idProducto}`);
         console.log(response);
 
-        
-        let datos = await response.json();
-        console.log(datos);
+        let result = await response.json();
 
-        let producto = datos.payload[0];
-
+        if(response.ok) {
+            
+            let producto = result.payload[0]; 
         
-        mostrarProducto(producto); 
+            mostrarProducto(producto); 
+
+        } else {
+            
+            console.error(result.message)
+        
+            mostrarError(result.message);
+        } 
 
     } catch (error) {
         console.error("Error: ", error);
+        
     }
 
 });
@@ -148,4 +155,15 @@ async function actualizarProducto(event) {
     }
 
 
+}
+
+function mostrarError(message) {
+    listado_productos.innerHTML = `
+        <li class="mensaje-error">
+            <p>
+                <strong>Error:</strong>
+                <span>${message}</span>
+            </p>
+        </li>
+    `;
 }

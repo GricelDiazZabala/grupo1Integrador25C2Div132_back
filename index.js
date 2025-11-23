@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 // Ruta que consulta productos y renderiza vista index.ejs
 app.get("/index", async (req, res) => {
     try {
-        const [rows] = await connection.query("SELECT * FROM productos");
+        const [rows] = await connection.query("SELECT * FROM productos WHERE activo = 1");
         res.render("index", {
             title: "Indice",
             about: "Lista de productos",
