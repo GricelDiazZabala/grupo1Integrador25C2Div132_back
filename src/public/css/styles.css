@@ -1,118 +1,265 @@
-/*================
-    General
-================*/
+/* GENERALES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    line-height: 1.6;
+}
+
 header {
-    margin-top: 30px;
+    background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);
+    box-shadow: 0 2px 10px rgba(74, 144, 226, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-ul {
-    padding-left: 0;
-}
-
-li {
-    list-style-type: none;
-}
-
-
-/*================
-    Encabezado
-================*/
 nav ul {
     display: flex;
-    justify-content: space-between;
+    list-style: none;
+    justify-content: center;
+    padding: 15px 0;
+    flex-wrap: wrap;
 }
 
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    margin: 0 5px;
+    border-radius: 25px;
+    font-weight: 500;
+    display: block;
+}
 
-/*================
-    main
-================*/
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+nav a li {
+    text-align: center;
+}
+
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+h1 {
+    color: #2d3748;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4a90e2, transparent);
+    margin: 15px 0;
+}
+
+/* CARTAS DE PRODUCTOS */
 #contenedor-productos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 30px; 
+    margin-top: 30px; 
 }
 
 .card-producto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid;
-    width: 175px;
-    height: 200px;
-    margin: 5px;
-    font-size: 12px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
     text-align: center;
-    justify-content: space-evenly;
+    width: 280px; 
+    margin: 16px;
 }
 
-#contenedor-productos h5, #contenedor-productos p {
-    margin: 0;
+.card-producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
 }
 
 .img-producto {
-    width: 120px;
-    height: 140px;
-    object-fit: contain;
-    border-radius: 6px;
-    background-color: white; 
-}
-
-
-#listado-productos {
     width: 100%;
-    display: flex;
-    font-size: 14px;
-    justify-content: space-between;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 15px; 
 }
 
-.li-listados {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 75%;
+.card-producto h5 {
+    color: #2d3748;
+    font-size: 20px; 
+    margin-bottom: 10px; 
+    font-weight: 600;
 }
 
-.li-listados img {
-    width: 65px;
+.card-producto p {
+    color: #4a5568;
+    margin-bottom: 5px; 
 }
 
-.li-listados p, .li-listados img {
-    margin-bottom: 0;
-}
-
-.li-botonera {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-}
+/* FORMULARIOS */
 
 .products-form {
-    width: 35%;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 110px;
-    justify-content: space-between;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid #e2e8f0;
 }
 
 .products-form-amplio {
-    width: 50%;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #e2e8f0;
+}
+
+.products-form label,
+.products-form-amplio label {
+    display: block;
+    margin-bottom: 10px;
+    color: #2d3748;
+    font-weight: 500;
+}
+
+.products-form input,
+.products-form select,
+.products-form-amplio input,
+.products-form-amplio select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
     margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.products-form input[type="submit"],
+.products-form-amplio input[type="submit"] {
+    background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.products-form input[type="submit"]:hover,
+.products-form-amplio input[type="submit"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+}
+
+/* productos listados */
+
+#listado-productos {
+    list-style: none;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.li-listados {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #4a90e2;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
 }
 
-
-.mensaje-error strong {
-    color: #ae4f4e;
+.li-botonera {
+    text-align: center;
+    margin-top: 15px;
 }
+
+.img-listados {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.li-listados p {
+    margin: 10px 0;
+    color: #4a5568;
+}
+
+.li-listados strong {
+    color: #2d3748;
+}
+
+/*botones de los formularios*/
+
+input[type="button"],
+input[type="submit"] {
+    background: linear-gradient(135deg, #4a90e2 0%, #63b3ed 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+input[type="button"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+#deleteProduct_button {
+    background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%);
+}
+
+#deleteProduct_button:hover {
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4);
+}
+
+#updateProduct_button {
+    background: linear-gradient(135deg, #38a169 0%, #68d391 100%);
+}
+
+#updateProduct_button:hover {
+    box-shadow: 0 4px 12px rgba(56, 161, 105, 0.4);
+}
+
+/* errores */
 
 .mensaje-error {
-    color: #a94442;
-    background-color: #f2dede;
-    border: 2px solid #ebccd1;
-    padding: 10px 30px;
-    border-radius: 4px;
-    font-size: 16px;
+    background: #fed7d7;
+    color: #c53030;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.mensaje-error p {
+    margin: 0;
 }
