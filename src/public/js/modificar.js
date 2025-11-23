@@ -10,8 +10,6 @@ getProducts_form.addEventListener("submit", async (event) => {
 
     
     let formData = new FormData(event.target);
-    console.log(formData);
-
 
     let data = Object.fromEntries(formData.entries());
     console.log(data);
@@ -73,25 +71,27 @@ function crearFormularioPut(event, producto) {
             <input type="hidden" name="id" value="${producto.id}">
 
             <label for="nameProd">Nombre</label>
-            <input type="text" name="name" id="nameProd" value="${producto.name}" required>
+            <input type="text" name="nombre_producto" id="nameProd" value="${producto.nombre_producto}" required>
             <br>
 
-            <label for="imageProd">Imagen</label>
-            <input type="text" name="image" id="imageProd" value="${producto.image}" required>
+            <label for="priceProd">Precio</label>
+            <input type="number" name="precio_producto" id="priceProd" value="${producto.precio_producto}" required>
+            
             <br>
 
             <label for="categoryProd">Categoria</label>
             <select name="category" id="categoryProd" required>
-                <option value="food">comida</option>
-                <option value="drink">bebida</option>
+                <option value="mate">mate</option>
+                <option value="termo">termo</option>
             </select>
             <br>
 
-            <label for="priceProd">Precio</label>
-            <input type="number" name="price" id="priceProd" value="${producto.price}" required>
+            <label for="imageProd">Imagen</label>
+            <input type="text" name="img_producto" id="imageProd" value="${producto.img_producto}" required>
+            
             <br>
 
-            <input type="hidden" name="active" value="${producto.active}">
+            <input type="hidden" name="activo" value="${producto.activo}">
 
             <input type="submit" value="Actualizar producto">
         </form>
