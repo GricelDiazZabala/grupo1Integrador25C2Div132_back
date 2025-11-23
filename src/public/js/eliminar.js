@@ -1,7 +1,6 @@
 let getProducts_form = document.getElementById("getProducts-form");
 let listado_productos = document.getElementById("listado-productos");
-
-let url = "http://localhost:3000/api/products";
+import { API_BASE_URL } from "./config.js";
 
 
 getProducts_form.addEventListener("submit", async (event) => {
@@ -20,7 +19,7 @@ getProducts_form.addEventListener("submit", async (event) => {
 
     try {
 
-        let response = await fetch(`http://localhost:3000/api/products/${idProducto}`);
+        let response = await fetch(`${API_BASE_URL}/${idProducto}`);
         console.log(response);
 
         

@@ -13,10 +13,10 @@ const selectProductById = (id) => {
     return connection.query(sql, [id]);
 }
 
-const insertProduct = (name, image, category, price) => {
-    let sql = "INSERT INTO productos (name, image, category, price) VALUES (?, ?, ?, ?)";
+const insertProduct = (nombre_producto, precio_producto, tipo_producto, img_producto) => {
+    let sql = "INSERT INTO productos (nombre_producto, precio_producto, tipo_producto, img_producto) VALUES (?, ?, ?, ?)";
 
-    return connection.query(sql, [name, image, category, price]);
+    return connection.query(sql, [nombre_producto, precio_producto, tipo_producto, img_producto]);
 }
 
 

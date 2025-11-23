@@ -1,3 +1,3 @@
-import productosRoutes from './productos.routes.js';
+import productsRoutes from './products.routes.js';
 
-export { productosRoutes };
+export { productsRoutes };

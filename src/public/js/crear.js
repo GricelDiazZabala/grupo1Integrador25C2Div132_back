@@ -1,5 +1,5 @@
 let altaProducts_form = document.getElementById("altaProducts-form");
-let url = "http://localhost:3000/api/products";
+import { API_BASE_URL } from "./config.js";
 
 altaProducts_form.addEventListener("submit", event => {
 
@@ -20,11 +20,11 @@ altaProducts_form.addEventListener("submit", event => {
 
 
 async function enviarProducto(data) {
-    console.table(data); // Recibimos correctamente los datos del formulario
+    console.table(data); 
 
     try {
 
-        let response = await fetch(url, {
+        let response = await fetch(API_BASE_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

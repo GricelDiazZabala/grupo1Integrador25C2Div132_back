@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors"; 
 import environments from "./src/api/config/environments.js";
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
-import { productosRoutes } from "./src/api/routes/index.js";
+import { productsRoutes } from "./src/api/routes/index.js";
 import { join, __dirname } from "./src/api/utils/index.js";
 import connection from "./src/api/database/db.js";
 
@@ -34,7 +34,7 @@ app.get("/index", async (req, res) => {
         res.render("index", {
             title: "Indice",
             about: "Lista de productos",
-            products: rows
+            productos: rows
         }); 
     } catch (error) {
         console.log(error);
@@ -76,7 +76,7 @@ app.get("/eliminar", (req, res) => {
 });
 
 // -------------------- RUTAS API --------------------
-app.use("/api/products", productosRoutes);
+app.use("/api/products", productsRoutes);
 
 // -------------------- SERVIDOR --------------------
 app.listen(PORT, () => {
