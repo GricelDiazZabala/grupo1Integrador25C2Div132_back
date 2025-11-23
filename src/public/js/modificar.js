@@ -68,30 +68,30 @@ function crearFormularioPut(event, producto) {
         <form id="updateProducts-form" class="products-form-amplio">
 
             <input type="hidden" name="id" value="${producto.id}">
-
-            <label for="nameProd">Nombre</label>
-            <input type="text" name="nombre_producto" id="nameProd" value="${producto.nombre_producto}" required>
-            <br>
-
-            <label for="priceProd">Precio</label>
-            <input type="number" name="precio_producto" id="priceProd" value="${producto.precio_producto}" required>
-            
-            <br>
-
-            <label for="categoryProd">Categoria</label>
-            <select name="tipo_producto" id="categoryProd" required>
-                <option value="mate">mate</option>
-                <option value="termo">termo</option>
-            </select>
-            <br>
-
-            <label for="imageProd">Imagen</label>
-            <input type="text" name="img_producto" id="imageProd" value="${producto.img_producto}" required>
-            
-            <br>
-
             <input type="hidden" name="activo" value="${producto.activo}">
-
+            <div>
+                <label for="nameProd">Nombre</label>
+                <input type="text" name="nombre_producto" id="nameProd" value="${producto.nombre_producto}" required>
+            </div>
+            <div>
+                <label for="priceProd">Precio</label>
+                <input type="number" name="precio_producto" id="priceProd" value="${producto.precio_producto}" required>
+            </div>
+            <div>
+                <label for="categoryProd">Categoria</label>
+                <select name="tipo_producto" id="categoryProd" required>
+                    <option value="mate">mate</option>
+                    <option value="termo">termo</option>
+                </select>
+            </div>
+            <div>
+                <label for="imageProd">Imagen</label>
+                <input type="text" name="img_producto" id="imageProd" value="${producto.img_producto}" required>
+            </div>
+            <div>
+                <label for="activo">Activo</label>
+                <input type="checkbox" name="activo" id="activo" value="1" ${producto.activo ? "checked" : ""}>
+            </div>
             <input type="submit" value="Actualizar producto">
         </form>
     `;
