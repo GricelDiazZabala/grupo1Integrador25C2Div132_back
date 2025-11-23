@@ -7,8 +7,6 @@ getProducts_form.addEventListener("submit", async (event) => {
     
     event.preventDefault(); 
 
-
-
     
     let formData = new FormData(event.target); 
     console.log(formData);
@@ -20,10 +18,7 @@ getProducts_form.addEventListener("submit", async (event) => {
     let idProducto = data.id;
     console.log(idProducto);
 
-    try {
-
-        console.log(`Realizamos una peticion GET a ${url}/${idProducto}`);
-        
+    try {       
         
         let response = await fetch(`${API_BASE_URL}/${idProducto}`);
         console.log(response);
@@ -59,8 +54,8 @@ function mostrarProducto(producto) {
 
     let htmlProducto = `
         <li class="li-listados">
-            <img src="${producto.image}" alt="${producto.name}" class="img-listados">
-            <p>Id: ${producto.id}/ Nombre: ${producto.name}/ <strong>Precio: $${producto.price}</strong></p>
+            <img src="${producto.img_producto}" alt="${producto.nombre_producto}" class="img-producto">
+            <p>Id: ${producto.id}/ Nombre: ${producto.nombre_producto}/ <strong>Precio: $${producto.precio_producto}</strong></p>
         </li>
         `;
 

@@ -50,8 +50,8 @@ nav ul {
 }
 
 .img-producto {
-    width: 100px;
-    height: 120px;
+    width: 120px;
+    height: 140px;
     object-fit: contain;
     border-radius: 6px;
     background-color: white; 
