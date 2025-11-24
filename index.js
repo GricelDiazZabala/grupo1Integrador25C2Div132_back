@@ -24,7 +24,10 @@ app.set("views", join(__dirname, "src", "views"));
 
 // -------------------- RUTAS PRINCIPALES --------------------
 app.get("/", (req, res) => {
-    res.send("TP Integrador Div 132");
+    res.render("login", {
+        title: "Login de administrador",
+        about: "Ingrese sus credenciales para continuar"
+    });
 });
 
 // Ruta que consulta productos y renderiza vista index.ejs
