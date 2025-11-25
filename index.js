@@ -4,6 +4,7 @@ import cors from "cors";
 import environments from "./src/api/config/environments.js";
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 import { productsRoutes } from "./src/api/routes/index.js";
+import { salesRoutes } from "./src/api/routes/index.js";
 import { join, __dirname } from "./src/api/utils/index.js";
 import connection from "./src/api/database/db.js";
 
@@ -80,6 +81,7 @@ app.get("/eliminar", (req, res) => {
 
 // -------------------- RUTAS API --------------------
 app.use("/api/products", productsRoutes);
+app.use("/api/sales", salesRoutes);
 
 // -------------------- SERVIDOR --------------------
 app.listen(PORT, () => {

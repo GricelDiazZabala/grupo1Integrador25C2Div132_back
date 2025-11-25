@@ -1,3 +1,5 @@
+   //ToDo: hacer la logica de login en el back y ver si lo que esta hecho funciona
+
 let login_form = document.getElementById("login-form");
 import { API_BASE_URL } from "./config.js";
 
@@ -43,3 +45,5 @@ async function enviarLogin(data) {
     } catch (error) {
         console.error("Error: ", error);     
     }}
+
+
