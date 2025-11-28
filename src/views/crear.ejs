@@ -1,37 +1,50 @@
 <%- include("partials/head.ejs") %>
-<%- include("partials/nav.ejs") %>
+    <%- include("partials/nav.ejs") %>
 
-<main>
-    <h1> <%= about %> </h1>
+        <main>
+            <h1>
+                <%= about %>
+            </h1>
 
-    <form id="altaProducts-form" class="products-form-amplio">
+            <form id="altaProducts-form" class="products-form-amplio">
 
-        <label for="nameProd">Nombre</label>
-        <input type="text" name="nombre_producto" id="nameProd" required>
-        <br>
+                <label for="nameProd">Nombre</label>
+                <input type="text" name="nombre_producto" id="nameProd" required>
+                <br>
 
-        <label for="priceProd">Precio</label>
-        <input type="number" name="precio_producto" id="priceProd" required>
-        <br>
+                <label for="priceProd">Precio</label>
+                <input type="number" name="precio_producto" id="priceProd" required>
+                <br>
 
-        <label for="categoryProd">Categoria</label>
-        <select name="tipo_producto" id="categoryProd" required>
-            <option value="mate">mate</option>
-            <option value="termo">termo</option>
-        </select>
-        <br>
+                <label for="categoryProd">Categoria</label>
+                <select name="tipo_producto" id="categoryProd" required>
+                    <option value="mate">mate</option>
+                    <option value="termo">termo</option>
+                </select>
+                <br>
 
-        <label for="imageProd">Imagen</label>
-        <input type="text" name="img_producto" id="imageProd" required>
-        <br>
+                <label id="dropArea" class="drop-zone">
+                    <img src="/img/subir-imagen.png" alt="Subir imagen" class="upload-icon">
+                    <p class="drop-text">Arrastra un archivo aquí o <span>explora</span></p>
+                    <p class="drop-subtext">Tamaño máximo: 5MB</p>
+                    <input type="file" id="fileInput" name="image" accept="image/*" required />
+                </label>
 
-        <input type="submit" value="Crear producto">
-    </form>
+                <div class="file-preview" id="filePreview">
+                    <div id="fileName">Archivo: </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <br>
 
-    <hr>
-    <div id="contenedor-productos"></div>
-</main>
+                <input type="submit" value="Crear producto">
+            </form>
 
-<script type="module" src="js/crear.js"></script>
+            <hr>
+            <div id="contenedor-productos"></div>
+        </main>
 
-<%- include("partials/footer.ejs") %>
+        <script type="module" src="/js/crear.js"></script>
+
+        <%- include("partials/footer.ejs") %>

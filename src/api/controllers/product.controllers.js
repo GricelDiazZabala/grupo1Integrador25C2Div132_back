@@ -1,8 +1,8 @@
-import ProductModel from "../models/product.models.js"; 
+import ProductModel from "../models/product.models.js";
 
 export const getAllProducts = async (req, res) => {
     try {
-        
+
         const [rows, fields] = await ProductModel.selectAllProducts();
 
         res.status(200).json({
@@ -20,15 +20,15 @@ export const getAllProducts = async (req, res) => {
 }
 
 
-export const getProductById = async (req, res) => { 
-    
+export const getProductById = async (req, res) => {
+
     try {
 
         let { id } = req.params;
-        
+
         const [rows] = await ProductModel.selectProductById(id);
 
-        if(rows.length === 0) {
+        if (rows.length === 0) {
 
             console.log(`Error!! No existe producto con el id ${id}`);
 
@@ -56,15 +56,16 @@ export const getProductById = async (req, res) => {
 export const createProduct = async (req, res) => {
 
     try {
-    
-        let { nombre_producto, precio_producto, tipo_producto, img_producto } = req.body;
+
+        let { nombre_producto, precio_producto, tipo_producto } = req.body;
+        let img_producto = "/img/" + req.file?.filename;
         console.log(req.body);
         console.log(`Nombre producto: ${nombre_producto}`);
 
 
-        if(!nombre_producto || !precio_producto || !tipo_producto || !img_producto) {
+        if (!nombre_producto || !precio_producto || !tipo_producto || !img_producto) {
             return res.status(400).json({
-                message: "Datos invalidos, asegurate de enviar todos los campos"
+                message: "Datos inválidos, asegurate de enviar todos los campos"
             });
         }
 
@@ -89,12 +90,14 @@ export const createProduct = async (req, res) => {
 
 export const modifyProduct = async (req, res) => {
     try {
-        
-        let { id, nombre_producto, precio_producto, tipo_producto, img_producto, activo } = req.body;
+
+        let { id, nombre_producto, precio_producto, tipo_producto, activo } = req.body;
+        let img_producto = "/img/" + req.file?.filename;
+        console.log(req.body);
 
 
-        
-        if(!id || !nombre_producto || !precio_producto || !tipo_producto || !img_producto || !activo) {
+
+        if (!id || !nombre_producto || !precio_producto || !tipo_producto || !img_producto || !activo) {
             return res.status(400).json({
                 message: "Faltan campos requeridos"
             });
@@ -105,7 +108,7 @@ export const modifyProduct = async (req, res) => {
         console.log(result);
 
 
-        
+
         if (result.affectedRows === 0) {
             return res.status(400).json({
                 message: "No se actualizo el producto"
@@ -117,7 +120,7 @@ export const modifyProduct = async (req, res) => {
             message: `Producto con id: ${id} actualizado correctamente`
         });
 
-    } catch(error) {
+    } catch (error) {
 
         console.error("Error al actualizar producto: ", error);
 
@@ -134,7 +137,7 @@ export const removeProduct = async (req, res) => {
 
         let [result] = await ProductModel.deleteProduct(id);
 
-        if(result.affectedRows === 0) {
+        if (result.affectedRows === 0) {
             return res.status(400).json({
                 message: `No se elimino el producto con id: ${id}`
             });

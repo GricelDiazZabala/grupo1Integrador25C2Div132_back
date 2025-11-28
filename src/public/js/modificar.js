@@ -1,81 +1,55 @@
+import { API_BASE_URL } from "./config.js";
+
 let getProducts_form = document.getElementById("getProducts-form");
 let listado_productos = document.getElementById("listado-productos");
 let contenedor_formulario = document.getElementById("contenedor-formulario");
-import { API_BASE_URL } from "./config.js";
 
-
+// Consultar producto por ID
 getProducts_form.addEventListener("submit", async (event) => {
-    
-    event.preventDefault(); 
+    event.preventDefault();
 
-    
-    let formData = new FormData(event.target);
-
-    let data = Object.fromEntries(formData.entries());
-    console.log(data);
-
-    let idProducto = data.id;
-    console.log(idProducto); 
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    const idProducto = data.id;
 
     try {
-    
-        let response = await fetch(`${API_BASE_URL}/${idProducto}`);
-        console.log(response);
+        const response = await fetch(`${API_BASE_URL}/${idProducto}`);
+        const result = await response.json();
 
-        let result = await response.json();
-
-        if(response.ok) {
-            
-            let producto = result.payload[0]; 
-        
-            mostrarProducto(producto); 
-
+        if (response.ok) {
+            const producto = result.payload[0];
+            mostrarProducto(producto);
         } else {
-            
-            console.error(result.message)
-        
             mostrarError(result.message);
-        } 
-
+        }
     } catch (error) {
         console.error("Error: ", error);
-        
     }
-
 });
 
+// Mostrar producto consultado
 function mostrarProducto(producto) {
-
-    let htmlProducto = `
+    listado_productos.innerHTML = `
         <li class="li-listados">
-            <img src="${producto.img_producto}" alt="${producto.nombre_producto}" class="img-listados">
-            <p>Id: ${producto.id}/ Nombre: ${producto.nombre_producto}/ <strong>Precio: $${producto.precio_producto}</strong></p>
+            <img src="/img/${producto.img_producto}" alt="${producto.nombre_producto}" class="img-listados">
+            <p>Id: ${producto.id} / Nombre: ${producto.nombre_producto} / <strong>Precio: $${producto.precio_producto}</strong></p>
         </li>
         <li class="li-botonera">
             <input type="button" id="updateProduct_button" value="Actualizar producto">
         </li>
-        `;
+    `;
 
-    listado_productos.innerHTML = htmlProducto;
-
-    let updateProduct_button = document.getElementById("updateProduct_button");
-
-    updateProduct_button.addEventListener("click", event => {
-        crearFormularioPut(event, producto);
-    });
+    document.getElementById("updateProduct_button")
+        .addEventListener("click", (event) => crearFormularioPut(event, producto));
 }
 
-
+// Crear formulario de actualización
 function crearFormularioPut(event, producto) {
+    event.stopPropagation();
 
-    event.stopPropagation(); 
-    console.table(producto); 
-
-    let formularioPutHtml = `
-        <form id="updateProducts-form" class="products-form-amplio">
-
+    contenedor_formulario.innerHTML = `
+        <form id="updateProducts-form" class="products-form-amplio" enctype="multipart/form-data">
             <input type="hidden" name="id" value="${producto.id}">
-            <input type="hidden" name="activo" value="${producto.activo}">
             <div>
                 <label for="nameProd">Nombre</label>
                 <input type="text" name="nombre_producto" id="nameProd" value="${producto.nombre_producto}" required>
@@ -87,13 +61,21 @@ function crearFormularioPut(event, producto) {
             <div>
                 <label for="categoryProd">Categoria</label>
                 <select name="tipo_producto" id="categoryProd" required>
-                    <option value="mate">mate</option>
-                    <option value="termo">termo</option>
+                    <option value="mate" ${producto.tipo_producto === "mate" ? "selected" : ""}>mate</option>
+                    <option value="termo" ${producto.tipo_producto === "termo" ? "selected" : ""}>termo</option>
                 </select>
             </div>
-            <div>
-                <label for="imageProd">Imagen</label>
-                <input type="text" name="img_producto" id="imageProd" value="${producto.img_producto}" required>
+            <label id="dropArea" class="drop-zone">
+                <img src="/img/subir-imagen.png" alt="Subir imagen" class="upload-icon">
+                <p class="drop-text">Arrastra un archivo aquí o <span>explora</span></p>
+                <p class="drop-subtext">Tamaño máximo: 5MB</p>
+                <input type="file" id="fileInput" name="image" accept="image/*" />
+            </label>
+            <div class="file-preview" id="filePreview">
+                <div id="fileName">Archivo: </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="progressFill"></div>
+                </div>
             </div>
             <div>
                 <label for="activo">Activo</label>
@@ -103,67 +85,89 @@ function crearFormularioPut(event, producto) {
         </form>
     `;
 
-    contenedor_formulario.innerHTML = formularioPutHtml;
+    document.getElementById("updateProducts-form")
+        .addEventListener("submit", actualizarProducto);
 
-    let updateProducts_form = document.getElementById("updateProducts-form");
-
-    updateProducts_form.addEventListener("submit", event => {
-        actualizarProducto(event)
-    });
+    // Activar drag & drop
+    activarDragAndDrop();
 }
 
-
+// Actualizar producto
 async function actualizarProducto(event) {
     event.preventDefault();
 
-    
-    let formData = new FormData(event.target); 
-
-    let data = Object.fromEntries(formData.entries()); 
-    console.log("los datos del formulario de update", data);
+    const formData = new FormData(event.target);
 
     try {
-        let response = await fetch(API_BASE_URL, {
+        const response = await fetch(API_BASE_URL, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
+            body: formData 
         });
 
-        console.log(response);
+        const result = await response.json();
 
-        let result = await response.json(); 
-
-        
-        if(response.ok) { 
-            console.log(result.message);
+        if (response.ok) {
             alert(result.message);
-
-            
             listado_productos.innerHTML = "";
             contenedor_formulario.innerHTML = "";
-
         } else {
-            console.error("Error: ", result.message);
             alert(result.message);
         }
-
     } catch (error) {
         console.error("Error al enviar los datos: ", error);
         alert("Error al procesar la solicitud");
     }
-
-
 }
 
+// Mostrar error
 function mostrarError(message) {
     listado_productos.innerHTML = `
         <li class="mensaje-error">
-            <p>
-                <strong>Error:</strong>
-                <span>${message}</span>
-            </p>
+            <p><strong>Error:</strong> <span>${message}</span></p>
         </li>
     `;
+}
+
+// Drag & Drop
+function activarDragAndDrop() {
+    const dropArea = document.getElementById("dropArea");
+    const fileInput = document.getElementById("fileInput");
+    const filePreview = document.getElementById("filePreview");
+    const fileName = document.getElementById("fileName");
+    const progressFill = document.getElementById("progressFill");
+
+    fileInput.addEventListener("change", () => {
+        if (fileInput.files.length) {
+            showFile(fileInput.files[0]);
+        }
+    });
+
+    ["dragenter", "dragover"].forEach(eventName => {
+        dropArea.addEventListener(eventName, e => {
+            e.preventDefault();
+            dropArea.classList.add("dragover");
+        });
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+        dropArea.addEventListener(eventName, e => {
+            e.preventDefault();
+            dropArea.classList.remove("dragover");
+        });
+    });
+
+    dropArea.addEventListener("drop", e => {
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            fileInput.files = files;
+            showFile(files[0]);
+        }
+    });
+
+    function showFile(file) {
+        filePreview.style.display = "flex";
+        fileName.textContent = `Archivo: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        progressFill.style.width = "0%";
+        progressFill.style.backgroundColor = "#2563eb";
+    }
 }

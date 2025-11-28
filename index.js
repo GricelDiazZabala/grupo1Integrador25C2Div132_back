@@ -6,6 +6,7 @@ import { loggerUrl } from "./src/api/middlewares/middlewares.js";
 import { productsRoutes, salesRoutes, authRoutes, adminRoutes } from "./src/api/routes/index.js";
 import { join, __dirname } from "./src/api/utils/index.js";
 import connection from "./src/api/database/db.js";
+import { handleMulterError } from "./src/api/middlewares/multer.middlewares.js";
 
 
 // -------------------- CONFIGURACIÓN --------------------
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(loggerUrl);
 app.use(express.json()); 
 app.use(express.static(join(__dirname, "src", "public")));
+
 
 // -------------------- MOTOR DE VISTAS --------------------
 // Configuramos EJS como motor de vistas
@@ -35,6 +37,7 @@ app.use("/admin", adminRoutes);
 // -------------------- RUTAS API --------------------
 app.use("/api/products", productsRoutes);
 app.use("/api/sales", salesRoutes);
+app.use(handleMulterError);
 
 // -------------------- SERVIDOR --------------------
 app.listen(PORT, () => {

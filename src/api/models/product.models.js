@@ -9,6 +9,20 @@ const selectAllProducts = () => {
 
 }
 
+
+//todo : arreglar la paginacion
+
+/*
+export const selectProducts = async (limit = 10, offset = 0) => {
+    const sqlTotal = "SELECT COUNT(*) AS total FROM productos WHERE activo = 1";
+    const [[ {total} ]] = await connection.query(sqlTotal);
+    const sql = "SELECT * FROM productos WHERE activo = 1 LIMIT ? OFFSET ?";
+    const [rows] = connection.query(sql, [limit, offset]);
+    return { rows, total };
+}
+    */ 
+
+
 const selectProductById = (id) => {
     
     let sql = "SELECT * FROM productos WHERE productos.id = ?";
