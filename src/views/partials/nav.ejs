@@ -1,6 +1,6 @@
 <header>
-    <nav>
-        <ul>
+    <nav class="nav-container">
+        <ul class="nav-main">
             <a href="/admin/index">
                 <li>Ver</li>
             </a>
@@ -19,6 +19,15 @@
             <a href="/admin/crearUsuario">
                 <li>Crear Usuario</li>
             </a>
+            <a href="/ventas/excel">
+                <li>descargar ventas</li>
+            </a>
+
         </ul>
+
+        <form action="/logout" method="POST" class="logout-form">
+            <button type="submit" class="logout-btn">Cerrar sesion</button>
+        </form>
+
     </nav>
 </header>
