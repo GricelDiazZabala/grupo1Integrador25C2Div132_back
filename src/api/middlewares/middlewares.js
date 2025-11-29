@@ -22,7 +22,15 @@ const validateId = (req, res, next) => {
     next();
 }
 
+const requireAdmin = (req, res, next) => {
+    if(!req.session.user) {
+        return res.redirect("/login");
+    }   
+    next();
+}
+
 export {
     loggerUrl,
-    validateId
+    validateId,
+    requireAdmin
 }

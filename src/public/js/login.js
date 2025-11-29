@@ -6,6 +6,6 @@ let quickLoginBtn = document.getElementById("quickLogin");
 
 
 quickLoginBtn.addEventListener("click", () => {
-    emailUser.value = "admin@mates.com";
+    emailUser.value = "quick@test";
     passwordUser.value = "123456";
 });

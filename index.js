@@ -8,6 +8,7 @@ import { join, __dirname } from "./src/api/utils/index.js";
 import connection from "./src/api/database/db.js";
 import { handleMulterError } from "./src/api/middlewares/multer.middlewares.js";
 import session from "express-session";
+import { requireAdmin } from "./src/api/middlewares/middlewares.js";
 
 
 
@@ -45,7 +46,7 @@ app.use(session({
 app.use("/", authRoutes);
 
 // Rutas para el panel de administración
-app.use("/admin", adminRoutes);
+app.use("/admin", requireAdmin  ,adminRoutes);
 
 
 // -------------------- RUTAS API --------------------

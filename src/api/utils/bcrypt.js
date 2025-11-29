@@ -6,7 +6,6 @@ export async function hashPassword(password) {
     if (password.length < 6) {
         throw new Error("La contraseña debe tener al menos 6 caracteres");
     }
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
     return await bcrypt.hash(password, saltRounds);
 }
 

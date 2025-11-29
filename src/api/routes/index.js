@@ -10,7 +10,7 @@ import authRoutes from './auth.routes.js';
 
 export { authRoutes };
 
-import adminRoutes from './views.routes.js';
+import adminRoutes from './admin.routes.js';
 
 export { adminRoutes };
 

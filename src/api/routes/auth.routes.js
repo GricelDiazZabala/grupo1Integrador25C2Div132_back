@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { viewLogin } from  "../controllers/views.controllers.js";
+import { loginUser } from "../controllers/users.controllers.js";
 
 const router = Router();
 
@@ -10,5 +11,9 @@ router.get("/", (req, res) => {
 
 // Ruta de Login y llama al controlador para renderizar la vista
 router.get("/login", viewLogin);
+
+//el router llama al controlador para hacer el login y entra al index
+router.post("/login",loginUser);    
+
 
 export default router;
