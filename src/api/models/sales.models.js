@@ -24,5 +24,10 @@ export const insertSaleProduct = (id_venta, id_producto, cantidad, precio) => {
 
 };
 
+export const selectVentaById = (id) => {
+
+    const sql = "SELECT * FROM ventas WHERE id = ?";
+    return connection.query(sql, [id]); 
+};
 
 //ToDo ver si falta agregar algun controlador, ya que luego se tendra que hacer la factura 
