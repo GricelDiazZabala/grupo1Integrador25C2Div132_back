@@ -1,16 +1,16 @@
-import { selectAllSales } from "../models/sales.models.js";
+import { selectAllSales, insertSale, insertSaleProduct, selectVentaById } from "../models/sales.models.js";
 
 export const getAllSales = async (req, res) => {
 
     try {
 
-        const [rows] = await selectAllSales(); 
+        const [rows] = await selectAllSales();
         console.log(rows);
 
         res.status(200).json({
             payload: rows
         });
-    
+
     } catch (error) {
 
         console.error("ERROR obteniendo ventas: ", error.message);
@@ -27,10 +27,10 @@ export const getAllSales = async (req, res) => {
 export const createSale = async (req, res) => {
 
     try {
-        const{ nombre_usuario, productos } = req.body;
+        const { nombre_usuario, productos } = req.body;
         console.log(req.body);
 
-        if(!nombre_usuario || !Array.isArray(productos) || productos.length === 0) {
+        if (!nombre_usuario || !Array.isArray(productos) || productos.length === 0) {
             return res.status(400).json({
                 message: "Datos incompletos o invalidos"
             });
@@ -41,20 +41,51 @@ export const createSale = async (req, res) => {
         const venta_id = result.insertId;
 
         for (const p of productos) {
+            if (!p.id_producto || !p.cantidad || !p.precio) {
+                return res.status(400).json({ message: "Producto invalido en la lista" });
+            }
             await insertSaleProduct(venta_id, p.id_producto, p.cantidad, p.precio);
         }
 
         res.status(201).json({
-        message: "Venta creada",
-        venta_id: venta_id,
-        total: total,
-        cantidad_productos: productos.length
+            factura: {
+                venta_id,
+                cliente: nombre_usuario,
+                fecha: new Date().toISOString(),
+                productos: productos.map(p => ({
+                    id: p.id_producto,
+                    cantidad: p.cantidad,
+                    precio_unitario: p.precio,
+                    subtotal: p.precio * p.cantidad
+                })),
+                total
+            },
+            message: "Venta creada con éxito"
+        });
 
-    });
-        
     } catch (error) {
         console.error(error);
-        res.status(500).json({message: "Error al crear la venta"});
-        
+        res.status(500).json({ message: "Error al crear la venta" });
+
     }
 };
+
+
+export const getVentaById = async (req, res) => {
+    try {
+        let { id } = req.params;
+
+        const [rows] = await selectVentaById(id);
+
+        res.status(200).json({
+            payload: rows[0],
+            message: rows.length === 0 ? `no se encontro venta con id ${id}` : "datos obtenidos"
+        })
+    } catch (error) {
+        console.error("ERROR obteniendo la venta: ", error.message);
+        res.status(500).json({
+            message: "Error interno al obtener id",
+            error: error.message
+        })
+    }
+}
