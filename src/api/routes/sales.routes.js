@@ -1,7 +1,13 @@
 import { Router } from "express";
 const router = Router();
 
-import {createSale ,getAllSales, getVentaById} from "../controllers/sales.controllers.js";
+import {createSale ,getAllSales, getVentaById, getSalesExcel} from "../controllers/sales.controllers.js";
+
+import { requireAdmin } from "../middlewares/middlewares.js";
+
+
+// GET /api/ventas/excel para exportar todo a un excel
+router.get("/excel",requireAdmin, getSalesExcel); 
 
 // POST /api/ventas para que el cliente haga una venta
 router.post("/", createSale); 
@@ -14,8 +20,5 @@ router.get("/", getAllSales);
 
 
 
-
-// GET /api/ventas/excel para exportar todo a un excel
-//router.get("/excel", getSalesExcel); todavia no esta hecho
 
 export default router;

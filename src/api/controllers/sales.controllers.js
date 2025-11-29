@@ -1,4 +1,5 @@
 import { selectAllSales, insertSale, insertSaleProduct, selectVentaById } from "../models/sales.models.js";
+import { generateExcel } from "../utils/exceljs.js";
 
 export const getAllSales = async (req, res) => {
 
@@ -89,3 +90,30 @@ export const getVentaById = async (req, res) => {
         })
     }
 }
+
+// controlador para descargar todas las ventas en un archivo excel
+export const getSalesExcel = async (req, res) => {
+    try {
+        const [rows] = await selectAllSales();
+
+        const workbook = generateExcel(rows);
+
+        res.setHeader(
+            "Content-Disposition",
+            'attachment; filename="ventas.xlsx"'
+        );
+        res.setHeader(
+            "Content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+
+        // aca se hace la escritura del archivo
+        await workbook.xlsx.write(res);
+        res.end();
+    } catch (error) {
+        console.error("ERROR generando archivo Excel de ventas: ", error.message);
+        res.status(500).json({
+            message: "Error al generar archivo Excel"
+        });
+    }
+};
