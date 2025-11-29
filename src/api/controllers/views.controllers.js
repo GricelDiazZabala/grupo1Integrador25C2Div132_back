@@ -58,6 +58,13 @@ const viewEliminar = (req, res) => {
     });
 };
 
+const viewCrearUsuario = (req, res) => {
+    res.render("crearUsuario", {
+        title: "Crear Usuario",
+        about: "Formulario para crear un nuevo usuario"
+    });
+};
+
 
 export {
     viewLogin,
@@ -65,5 +72,6 @@ export {
     viewConsultar,
     viewCrear,
     viewModificar,
-    viewEliminar
+    viewEliminar,
+    viewCrearUsuario
 };

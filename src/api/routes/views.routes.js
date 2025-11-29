@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { viewIndex, viewConsultar, viewCrear, viewModificar, viewEliminar } from "../controllers/views.controllers.js";
+import { viewIndex, viewConsultar, viewCrear, viewModificar, viewEliminar, viewCrearUsuario } from "../controllers/views.controllers.js";
 
 const router = Router();
 
@@ -14,5 +14,7 @@ router.get("/crear", viewCrear);
 router.get("/modificar", viewModificar);
 
 router.get("/eliminar", viewEliminar);
+
+router.get("/crearUsuario", viewCrearUsuario)
 
 export default router;

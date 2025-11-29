@@ -4,7 +4,7 @@
     <section class="login-card">
         <h1><%= about %></h1>
         
-    <form id="login-form" class="products-form-amplio">
+    <form action ="/login" method="POST" id="login-form" class="products-form-amplio" >
 
         <label for="email">Correo electrónico</label>
             <input type="email" name="email" id="email" required placeholder="admin@mates.com">
@@ -25,7 +25,7 @@
 
         <label for="quickLogin">Acceso rapido (Para testing)</label>
         
-        <input type="submit" id="quickLogin" value="Acceso Rápido">
+        <input type="button" id="quickLogin" value="Acceso Rápido">
     
     </form>
 

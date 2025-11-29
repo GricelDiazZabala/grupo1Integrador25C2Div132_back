@@ -13,3 +13,7 @@ export { authRoutes };
 import adminRoutes from './views.routes.js';
 
 export { adminRoutes };
+
+import usersRoutes from './user.routes.js';
+
+export { usersRoutes };

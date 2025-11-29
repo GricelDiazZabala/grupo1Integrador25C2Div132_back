@@ -1,0 +1,30 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/nav.ejs") %>
+
+<main>
+    <h1><%= about %></h1>
+
+    <form id="altaUsers-form" class="products-form-amplio">
+
+        <label for="emailUser">Email</label>
+        <input type="email" name="email" id="emailUser" required placeholder="nuevoUser@correo.com">
+        <br>
+
+        <label for="passwordUser">Contraseña</label>
+        <input type="password" name="password" id="passwordUser" required placeholder="Min 6 caracteres">
+        <br>
+
+        <label for="confirmPasswordUser">Confirmar Contraseña</label>
+        <input type="password" name="confirmPassword" id="confirmPasswordUser" required placeholder="Repite la contraseña">
+        <br>
+
+        <input type="submit" value="Crear Usuario">
+    </form>
+
+    <hr>
+    <div id="contenedor-mensaje"></div>
+</main>
+
+<script type="module" src="/js/crearUsuario.js"></script>
+
+<%- include("partials/footer.ejs") %>
