@@ -39,7 +39,7 @@ export const createSale = async (req, res) => {
         let total = 0;
         const productosCalculados = [];
 
-        
+
         for (const p of productos) {
             if (!p.id_producto || !p.cantidad) {
                 return res.status(400).json({ message: "Producto invalido en la lista" });
@@ -59,7 +59,9 @@ export const createSale = async (req, res) => {
                 id_producto: p.id_producto,
                 cantidad: p.cantidad,
                 precio_unitario: precio,
-                subtotal
+                subtotal,
+                nombre_producto: rows[0].nombre_producto,
+                tipo_producto: rows[0].tipo_producto
             });
         }
 
