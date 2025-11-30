@@ -8,7 +8,7 @@ export const selectAllSales = () => {
 
 };
 
-//este controlador es para crear la venta principal
+//este model es para crear la venta principal
 export const insertSale = (nombre_usuario, total) => {
 
     const sql = "INSERT INTO ventas (nombre_usuario, total) VALUES (?, ?)";
@@ -16,7 +16,7 @@ export const insertSale = (nombre_usuario, total) => {
 
 };
 
-// este controlador es para crear la venta que relaciona las tablas 
+// este model es para crear la venta que relaciona las tablas 
 export const insertSaleProduct = (id_venta, id_producto, cantidad, precio) => {
 
     const sql = "INSERT INTO ventas_productos (id_venta, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
