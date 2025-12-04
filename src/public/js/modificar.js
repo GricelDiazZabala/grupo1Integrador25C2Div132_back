@@ -31,7 +31,7 @@ getProducts_form.addEventListener("submit", async (event) => {
 function mostrarProducto(producto) {
     listado_productos.innerHTML = `
         <li class="li-listados">
-            <img src="/img/${producto.img_producto}" alt="${producto.nombre_producto}" class="img-listados">
+            <img src="${producto.img_producto}" alt="${producto.nombre_producto}" class="img-listados">
             <p>Id: ${producto.id} / Nombre: ${producto.nombre_producto} / <strong>Precio: $${producto.precio_producto}</strong></p>
         </li>
         <li class="li-botonera">
