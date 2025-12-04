@@ -3,7 +3,7 @@ const router = Router();
 import { createUser } from "../controllers/users.controllers.js";
 
 
-//ruta para crear usuario
+//ruta POST para crear usuario
 router.post ("/", createUser);
 
 

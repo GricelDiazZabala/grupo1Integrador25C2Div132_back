@@ -15,7 +15,7 @@ router.get("/:id", validateId , getProductById);
 router.post("/", multerUploader.single("image"), handleMulterError, createProduct);
 router.put("/", multerUploader.single("image"), handleMulterError, modifyProduct);
 
-
+//DELETE /API/PRODUCTS/:ID valida que sea id y llama al controlador para eliminar un producto
 router.delete("/:id", validateId, removeProduct);
 
 export default router;

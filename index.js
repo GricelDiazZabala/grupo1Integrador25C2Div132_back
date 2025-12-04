@@ -1,3 +1,9 @@
+/**
+Archivo principal del servidor.
+Configura Express, middlewares, motor de vistas, sesiones y rutas.
+Punto de entrada de la aplicación backend.
+*/
+
 // -------------------- IMPORTS --------------------
 import express from "express";
 import cors from "cors"; 
