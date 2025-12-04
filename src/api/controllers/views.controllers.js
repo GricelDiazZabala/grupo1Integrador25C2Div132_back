@@ -58,6 +58,7 @@ const viewEliminar = (req, res) => {
     });
 };
 
+// Vista para crear usuario
 const viewCrearUsuario = (req, res) => {
     res.render("crearUsuario", {
         title: "Crear Usuario",

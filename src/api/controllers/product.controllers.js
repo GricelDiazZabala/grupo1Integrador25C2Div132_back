@@ -1,5 +1,11 @@
 import ProductModel from "../models/product.models.js";
 
+/*
+Obtiene todos los productos desde la base de datos llamando al modelo.
+PARAMETRO: Request req - Objeto de solicitud Express.
+PARAMETRO: Response res - Objeto de respuesta Express.
+RETURN: JSON - Lista de productos o mensaje de error.
+*/
 export const getAllProducts = async (req, res) => {
     try {
 
@@ -19,7 +25,11 @@ export const getAllProducts = async (req, res) => {
     }
 }
 
-
+/*
+Obtiene un producto por su ID llamando al modelo.
+PARAMETRO: Request req - Contiene el id del producto en req.params.
+PARAMETRO: Response res - Devuelve el JSON del producto encontrado en el payload o error si no existe.
+*/
 export const getProductById = async (req, res) => {
 
     try {
@@ -52,7 +62,11 @@ export const getProductById = async (req, res) => {
     }
 }
 
-
+/*
+Crea un nuevo producto en la base de datos llamando al modelo.
+PARAMETRO: Request req - Contiene nombre, precio, tipo y archivo de imagen.
+PARAMETRO: Response res - Devuelve mensaje de exito o error de validación.
+*/
 export const createProduct = async (req, res) => {
 
     try {
@@ -87,7 +101,11 @@ export const createProduct = async (req, res) => {
 }
 
 
-
+/*
+Modifica un producto existente llamando al modelo.
+PARAMETRO: Request req - Contiene id y datos actualizados del producto.
+PARAMETRO: Response res - Devuelve mensaje de exito o error si no se actualiza.
+*/
 export const modifyProduct = async (req, res) => {
     try {
 
@@ -130,7 +148,11 @@ export const modifyProduct = async (req, res) => {
     }
 }
 
-
+/*
+Elimina un producto por su ID.
+PARAMETRO: Request req - Contiene el id del producto en req.params.
+PARAMETRO: Response res - Devuelve mensaje de exito o error si no se elimina.
+*/
 export const removeProduct = async (req, res) => {
     try {
         let { id } = req.params;

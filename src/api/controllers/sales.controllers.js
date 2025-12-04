@@ -2,6 +2,11 @@ import { selectAllSales, insertSale, insertSaleProduct, selectVentaById } from "
 import { generateExcel } from "../utils/exceljs.js";
 import productModel from "../models/product.models.js"
 
+/*
+Obtiene todas las ventas desde la base de datos llamando al modelo.
+PARAMETRO: Request req - solicitud Express.
+PARAMETRO: Response res - Devuelve lista de ventas o error interno.
+ */
 export const getAllSales = async (req, res) => {
 
     try {
@@ -23,8 +28,14 @@ export const getAllSales = async (req, res) => {
 };
 
 
-//ToDo : hacer que el back calcule la venta total para no confiar en los datos del front y verificar que no vaya a causar error
-//asegurarme que el frontend manda los datos como los necesito desde el carrito
+/*
+Crea una nueva venta en la base de datos llamando al modelo tanto de ventas como de productos.
+Valida datos recibidos desde el frontend.
+Calcula subtotales y total en el backend para mayor seguridad.
+Inserta la venta y sus productos asociados.
+PARAMETRO: Request req - Contiene nombre_usuario y lista de productos.
+PARAMETRO: Response res - Devuelve factura con detalles de la venta o error.
+*/
 
 export const createSale = async (req, res) => {
     try {
@@ -93,7 +104,11 @@ export const createSale = async (req, res) => {
 };
 
 
-
+/*
+Obtiene una venta específica por su ID llamando al controlador.
+PARAMETRO: Request req - Contiene el id en req.params.
+PARAMETRO: Response res - Devuelve la venta encontrada o mensaje de error.
+ */
 export const getVentaById = async (req, res) => {
     try {
         let { id } = req.params;
@@ -113,7 +128,11 @@ export const getVentaById = async (req, res) => {
     }
 }
 
-// controlador para descargar todas las ventas en un archivo excel
+/*
+Genera y descarga un archivo Excel con todas las ventas.
+Request req - Solicitud Express.
+Response res - Devuelve archivo Excel o mensaje de error.
+*/
 export const getSalesExcel = async (req, res) => {
     try {
         const [rows] = await selectAllSales();
