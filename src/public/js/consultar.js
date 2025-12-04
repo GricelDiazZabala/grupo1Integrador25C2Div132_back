@@ -1,8 +1,9 @@
+//Seleccion de elementos DOM
 let getProducts_form = document.getElementById("getProducts-form");
 let listado_productos = document.getElementById("listado-productos");
 import { API_BASE_URL } from "./config.js";
 
-
+// Maneja el evento submit del formulario y se genera el fetch
 getProducts_form.addEventListener("submit", async (event) => {
     
     event.preventDefault(); 
@@ -43,6 +44,10 @@ getProducts_form.addEventListener("submit", async (event) => {
 
 });
 
+/*
+Renderiza un producto en el listado.
+PARAMETRO: Object producto - Objeto con propiedades: id, nombre_producto, precio_producto, img_producto.
+*/
 function mostrarProducto(producto) {
     console.table(producto); 
 
@@ -56,7 +61,10 @@ function mostrarProducto(producto) {
     listado_productos.innerHTML = htmlProducto;
 }
 
-
+/*
+Muestra un mensaje de error en el listado.
+PARAMETRO: string message - Texto del error.
+*/
 function mostrarError(message) {
     listado_productos.innerHTML = `
         <li class="mensaje-error">

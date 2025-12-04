@@ -1,10 +1,14 @@
 import { API_BASE_URL } from "./config.js";
-
+//manejo del DOM
 let getProducts_form = document.getElementById("getProducts-form");
 let listado_productos = document.getElementById("listado-productos");
 let contenedor_formulario = document.getElementById("contenedor-formulario");
 
-// Consultar producto por ID
+// Maneja el submit del formulario de consulta de productos
+// - Previene recarga de página
+// - Obtiene ID ingresado
+// - Llama al backend para traer producto por ID
+
 getProducts_form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -27,7 +31,11 @@ getProducts_form.addEventListener("submit", async (event) => {
     }
 });
 
-// Mostrar producto consultado
+/*
+Renderiza un producto en el listado y agrega botón de actualización.
+PARAMETRO: Object producto - Objeto con propiedades: id, nombre_producto, precio_producto, tipo_producto, img_producto, activo.
+*/
+
 function mostrarProducto(producto) {
     listado_productos.innerHTML = `
         <li class="li-listados">
@@ -43,7 +51,15 @@ function mostrarProducto(producto) {
         .addEventListener("click", (event) => crearFormularioPut(event, producto));
 }
 
-// Crear formulario de actualización
+/*
+Genera dinámicamente un formulario para actualizar producto.
+- Prellena campos con datos actuales.
+- Incluye drag & drop para imagen.
+- Activa evento submit para enviar actualización.
+PARAMETRO: Event event - Evento click del botón actualizar.
+PARAMETRO: Object producto - Datos del producto a editar.
+*/
+
 function crearFormularioPut(event, producto) {
     event.stopPropagation();
 
@@ -92,7 +108,12 @@ function crearFormularioPut(event, producto) {
     activarDragAndDrop();
 }
 
-// Actualizar producto
+/*
+Envía actualización de producto al backend.
+PARAMETRO: Event event - Evento submit del formulario.
+Muestra alert con resultado y limpia contenedores.
+*/
+
 async function actualizarProducto(event) {
     event.preventDefault();
 

@@ -1,4 +1,10 @@
-   //ToDo: hacer la logica de login en el back y ver si lo que esta hecho funciona
+/*
+Script de Quick Login.
+- Captura el botón "quickLogin".
+- Rellena automáticamente los campos de email y contraseña con valores de prueba.
+- Facilita el acceso rápido para el TEST.
+*/
+
 
 let emailUser = document.getElementById("email");
 let passwordUser = document.getElementById("password");

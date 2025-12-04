@@ -1,7 +1,13 @@
+// manejo del DOM
 let getProducts_form = document.getElementById("getProducts-form");
 let listado_productos = document.getElementById("listado-productos");
 import { API_BASE_URL } from "./config.js";
 
+
+// Maneja el submit del formulario de consulta de productos
+// - Previene recarga de página
+// - Obtiene ID ingresado
+// - Llama al backend para traer producto por ID
 
 getProducts_form.addEventListener("submit", async (event) => {
     
@@ -41,6 +47,11 @@ getProducts_form.addEventListener("submit", async (event) => {
 
 });
 
+/*
+Renderiza un producto en el listado y agrega botón de eliminación.
+PARAMETRO: Object producto - Objeto con propiedades: id, nombre_producto, precio_producto, img_producto.
+*/
+
 function mostrarProducto(producto) {
     console.table(producto);
 
@@ -73,6 +84,11 @@ function mostrarProducto(producto) {
     });
 }
 
+/*
+hace la peticion para eliminar un producto por su id.
+PARAMETRO: number id - ID del producto a eliminar.
+Muestra alert con resultado y limpia listado.
+*/
 
 async function eliminarProducto(id) {
     
@@ -100,6 +116,10 @@ async function eliminarProducto(id) {
     }
 }
 
+/*
+Muestra un mensaje de error en el listado.
+PARAMETRO: {string} message - Texto del error.
+*/
 
 function mostrarError(message) {
     listado_productos.innerHTML = `

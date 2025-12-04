@@ -1,6 +1,8 @@
 let altaProducts_form = document.getElementById("altaProducts-form");
 import { API_BASE_URL } from "./config.js";
 
+// Maneja el submit del formulario de alta de productos y el fetch correspondiente
+// Envía datos al backend usando FormData
 altaProducts_form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -24,6 +26,10 @@ altaProducts_form.addEventListener("submit", async (event) => {
     }
 });
 
+/*
+Envía un producto al backend en formato JSON por si ya no usaremos formdata.
+PARAMETRO: Object data - Objeto con propiedades del producto.
+*/
 async function enviarProducto(data) {
     console.table(data);
 

@@ -1,6 +1,11 @@
+// Seleccion del DOM
 const altaUsersForm = document.getElementById("altaUsers-form");
 const contenedorMensaje = document.getElementById("contenedor-mensaje");
 
+// Maneja el submit del formulario de alta de usuarios
+// - Previene recarga de página
+// - Valida contraseñas (coincidir y 6 caracteres como minimo)
+// - Envía datos al backend
 altaUsersForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -18,11 +23,18 @@ altaUsersForm.addEventListener("submit", async (event) => {
         return;
     }
 
-    // si no borro esto del objeto data la api me tira error por que no espera ese campo
+    // si no borro esto del objeto data la api me tira error porque no espera ese campo
     delete data.confirmPassword;
 
     await enviarUsuario(data);
 });
+
+
+/*
+Muestra un mensaje en el contenedor de mensajes.
+PARAMETRO: string mensaje - Texto del mensaje.
+PARAMETRO: string tipo - "success" o "error" (default: success).
+*/
 
 function mostrarMensaje(mensaje, tipo = "success") {
 
@@ -39,6 +51,11 @@ function mostrarMensaje(mensaje, tipo = "success") {
     }, 5000);
 }
 
+/*
+Envía datos del usuario al backend.
+PARAMETRO: Object} data - Objeto con propiedades del usuario (email, password).
+Muestra mensaje de éxito o error.
+*/
 
 async function enviarUsuario(data) {
     try {
