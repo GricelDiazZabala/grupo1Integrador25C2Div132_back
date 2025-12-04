@@ -1,5 +1,14 @@
 import ExcelJS from "exceljs";
 
+/*
+Genera un archivo Excel con los datos de ventas.
+PARAMETRO: {Array<Object>} data - Lista de ventas con propiedades:
+- number id - ID de la venta
+- string nombre_usuario - Cliente asociado
+- number total - Total de la venta
+- date|string fecha - Fecha de la venta
+RETURN: {ExcelJS.Workbook} - Workbook con hoja 'Ventas' y filas cargadas.
+*/
 
 export const generateExcel = (data) => {
     const workbook = new ExcelJS.Workbook();
