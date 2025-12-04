@@ -1,6 +1,9 @@
 import connection from "../database/db.js";
 
-
+/*
+Obtiene todas las ventas registradas.
+RETURN: Promise - Promesa con filas de ventas.
+*/
 export const selectAllSales = () => {
 
     const sql = "SELECT * FROM ventas";
@@ -8,7 +11,12 @@ export const selectAllSales = () => {
 
 };
 
-//este model es para crear la venta principal
+/*
+Inserta una nueva venta principal en la tabla 'ventas'.
+PARAMETRO: string nombre_usuario - Nombre del cliente.
+PARAMETRO: number total - Total calculado de la venta.
+RETURN: Promise - Promesa con resultado de la inserción.
+*/
 export const insertSale = (nombre_usuario, total) => {
 
     const sql = "INSERT INTO ventas (nombre_usuario, total) VALUES (?, ?)";
@@ -16,7 +24,15 @@ export const insertSale = (nombre_usuario, total) => {
 
 };
 
-// este model es para crear la venta que relaciona las tablas 
+/*
+Inserta un producto asociado a una venta en la tabla 'ventas_productos'.
+PARAMETRO: number id_venta - ID de la venta.
+PARAMETRO: number id_producto - ID del producto.
+PARAMETRO: number cantidad - Cantidad del producto vendido.
+PARAMETRO: number precio - Precio unitario del producto.
+RETURN: Promise - Promesa con resultado de la inserción.
+*/
+
 export const insertSaleProduct = (id_venta, id_producto, cantidad, precio) => {
 
     const sql = "INSERT INTO ventas_productos (id_venta, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
@@ -24,6 +40,11 @@ export const insertSaleProduct = (id_venta, id_producto, cantidad, precio) => {
 
 };
 
+/*
+Obtiene una venta específica por su ID.
+PARAMETRO: number id - ID de la venta.
+RETURN: Promise - Promesa con filas de la venta encontrada.
+*/
 export const selectVentaById = (id) => {
 
     const sql = "SELECT * FROM ventas WHERE id = ?";
