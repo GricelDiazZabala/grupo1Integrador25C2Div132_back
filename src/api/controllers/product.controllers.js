@@ -76,16 +76,22 @@ export const createProduct = async (req, res) => {
     try {
 
         let { nombre_producto, precio_producto, tipo_producto } = req.body;
+        
+        if (!req.file) {
+            return res.status(400).json({ message: "Debes subir una imagen del producto" });
+        }
         let img_producto = "/img/" + req.file?.filename;
+
         console.log(req.body);
         console.log(`Nombre producto: ${nombre_producto}`);
-
 
         if (!nombre_producto || !precio_producto || !tipo_producto || !img_producto) {
             return res.status(400).json({
                 message: "Datos inválidos, asegurate de enviar todos los campos"
             });
         }
+
+        nombre_producto = nombre_producto.trim().toLowerCase();
 
         if (!nombre_producto.trim()) {
             return res.status(400).json({
@@ -129,12 +135,12 @@ export const modifyProduct = async (req, res) => {
         let img_producto = "/img/" + req.file?.filename;
         if (!req.file) {
             const [rows] = await ProductModel.selectProductById(id);
-            if (rows.length === 0){
+            if (rows.length === 0) {
                 return res.status(400).json({
                     message: "ID invalido"
                 })
             }
-        img_producto = rows[0].img_producto;
+            img_producto = rows[0].img_producto;
         }
         console.log(req.body);
 
@@ -149,6 +155,8 @@ export const modifyProduct = async (req, res) => {
                 message: "Faltan campos requeridos"
             });
         }
+
+        nombre_producto = nombre_producto.trim().toLowerCase();
 
         let [result] = await ProductModel.updateProduct(nombre_producto, precio_producto, tipo_producto, img_producto, activo, id);
 
