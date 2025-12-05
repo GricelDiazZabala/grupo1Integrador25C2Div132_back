@@ -12,6 +12,12 @@ altaUsersForm.addEventListener("submit", async (event) => {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
+    data.password = data.password.trim();
+    data.confirmPassword = data.confirmPassword.trim();
+    if (!data.password.trim()) {
+        mostrarMensaje("La contraseña no puede estar vacía", "error");
+        return;
+    }
     // Validar que la contraseña coincida 
     if (data.password !== data.confirmPassword) {
         mostrarMensaje("Las contraseñas no coinciden", "error");

@@ -12,6 +12,9 @@ THROW: Error - Si la contraseña es demasiado corta.
 */
 
 export async function hashPassword(password) {
+    if (typeof password !== "string") {
+        throw new Error("La contraseña es obligatoria");
+    }
     if (password.length < 6) {
         throw new Error("La contraseña debe tener al menos 6 caracteres");
     }
