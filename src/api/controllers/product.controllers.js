@@ -36,6 +36,10 @@ export const getProductById = async (req, res) => {
 
         let { id } = req.params;
 
+        if (isNaN(id) || Number(id) <= 0) {
+            return res.status(400).json({ message: "ID inválido" });
+        }
+
         const [rows] = await ProductModel.selectProductById(id);
 
         if (rows.length === 0) {
@@ -83,6 +87,18 @@ export const createProduct = async (req, res) => {
             });
         }
 
+        if (!nombre_producto.trim()) {
+            return res.status(400).json({
+                message: "El nombre del producto no puede estar vacío"
+            });
+        }
+
+        if (isNaN(precio_producto) || Number(precio_producto) <= 0) {
+            return res.status(400).json({
+                message: "El precio debe ser mayor a 0"
+            });
+        }
+
         let [rows] = await ProductModel.insertProduct(nombre_producto, precio_producto, tipo_producto, img_producto);
 
 
@@ -111,9 +127,22 @@ export const modifyProduct = async (req, res) => {
 
         let { id, nombre_producto, precio_producto, tipo_producto, activo } = req.body;
         let img_producto = "/img/" + req.file?.filename;
+        if (!req.file) {
+            const [rows] = await ProductModel.selectProductById(id);
+            if (rows.length === 0){
+                return res.status(400).json({
+                    message: "ID invalido"
+                })
+            }
+        img_producto = rows[0].img_producto;
+        }
         console.log(req.body);
 
-
+        if (isNaN(id) || Number(id) <= 0) {
+            return res.status(400).json({
+                message: "ID invalido"
+            });
+        }
 
         if (!id || !nombre_producto || !precio_producto || !tipo_producto || !img_producto || !activo) {
             return res.status(400).json({
@@ -156,6 +185,10 @@ PARAMETRO: Response res - Devuelve mensaje de exito o error si no se elimina.
 export const removeProduct = async (req, res) => {
     try {
         let { id } = req.params;
+
+        if (isNaN(id) || Number(id) <= 0) {
+            return res.status(400).json({ message: "ID inválido" });
+        }
 
         let [result] = await ProductModel.deleteProduct(id);
 
